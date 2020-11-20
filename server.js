@@ -9,6 +9,13 @@ const express = require('express')
 
 const app = express()
 
+// request response test
+app.use((req, res) => {
+    res.json({
+        message: "서버 시작되었음"
+    })
+})
+
 const port = 5000
 
 app.listen(port, console.log("Server started"))
