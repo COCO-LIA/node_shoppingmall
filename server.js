@@ -10,11 +10,19 @@ const express = require('express')
 const app = express()
 
 // request response test
-app.use((req, res) => {
-    res.json({
-        message: "서버 시작되었음"
-    })
-})
+// app.use((req, res) => {
+//     res.json({
+//         message: "서버 시작되었음"
+//     })
+// })
+
+const productRoute = require("./route/product")
+const orderRoute = require("./route/order")
+
+
+
+app.use("/product", productRoute)
+app.use("/order",orderRoute)
 
 const port = 5000
 
