@@ -14,8 +14,19 @@ router.get("/1111", (req, res) => {
 
 // product 등록해주는 API
 router.post("/",(req, res) => {
+
+    // 사용자입력값설정
+
+    const productInfo = {
+        name: req.body.productname,
+        price: req.body.productprice,
+        category: req.body.category
+    }
+
+
     res.json({
-        msg: "product 등록해주는 API"
+        msg: "product 등록해주는 API",
+        product: productInfo
     })
 })
 
