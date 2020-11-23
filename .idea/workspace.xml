@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/route/product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +46,8 @@
       <option name="presentableId" value="Default" />
       <updated>1605851481863</updated>
       <workItem from="1605851483630" duration="6061000" />
-      <workItem from="1605858769146" duration="996000" />
+      <workItem from="1605858769146" duration="1256000" />
+      <workItem from="1606093348281" duration="984000" />
     </task>
     <servers />
   </component>
@@ -56,5 +56,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="594" y="267" width="670" height="676" key="search.everywhere.popup" timestamp="1606093967135">
+      <screen x="0" y="23" width="1792" height="1053" />
+    </state>
+    <state x="594" y="267" width="670" height="676" key="search.everywhere.popup/0.23.1792.1053@0.23.1792.1053" timestamp="1606093967135" />
   </component>
 </project>
