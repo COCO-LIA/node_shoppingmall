@@ -16,7 +16,19 @@ router.get("/1111", (req, res) => {
             res.json({
                 msg: "product total get",
                 count: docs.length,
-                products: docs
+                products: docs.map(doc => {
+                    return{
+                        id: doc._id,
+                        name: doc.name,
+                        price: doc.price,
+                        category: doc.category,
+                        request: {
+                            type: 'GET',
+                            url: "http://localhost:5000/product/" + doc._id
+                        }
+
+                    }
+                })
             })
         })
         .catch(err => {
@@ -40,7 +52,16 @@ router.get("/:productId",(req, res) => {
         .then(item => {
             res.json({
                 msg: "get product data " + item._id,
-                product: item
+                product: {
+                    id: item._id,
+                    name: item.name,
+                    price: item.price,
+                    category: item.category,
+                    reqest: {
+                        type: 'GET',
+                        url: "http://localhost:5000/product/1111"
+                    }
+                }
             })
         })
         .catch(err => {
@@ -81,7 +102,17 @@ router.post("/",(req, res) => {
         .then(item => {
             res.json({
                 msg: "saved product",
-                productInfo: item
+                productInfo: {
+                    id : item._id,
+                    name : item.name,
+                    price : item.price,
+                    category: item.category,
+                    request: {
+                        type: 'GET',
+                        url: "http://localhost:5000/product/" + item._id
+                    }
+                }
+
             })
         })
         .catch(err => {
@@ -114,7 +145,11 @@ router.patch("/:productId", (req, res) => {
         .findByIdAndUpdate(req.params.productId, { $set: updateOps})
         .then(() => {
             res.json({
-                msg: "updated product " + req.params.productId
+                msg: "updated product " + req.params.productId,
+                request:{
+                    type: 'GET',
+                    url: "http://localhost:5000/product/" + req.params.productId
+                }
             })
         })
         .catch(err => {
@@ -136,7 +171,11 @@ router.delete("/", (req, res) => {
         .deleteMany()
         .then(() => {
             res.json({
-                msg: "deleted products"
+                msg: "deleted products",
+                request: {
+                    type: 'GET',
+                    url: "http://localhost:5000/product/1111"
+                }
             })
         })
         .catch(err => {
@@ -158,7 +197,11 @@ router.delete("/:productId", (req, res) => {
         .findByIdAndDelete(req.params.productId)
         .then(() => {
             res.json({
-                msg: " deleted product"
+                msg: " deleted product",
+                request:{
+                    type: 'GET',
+                    url: "http://localhost:5000/product/1111"
+                }
             })
         })
         .catch(err => {
