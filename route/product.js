@@ -9,9 +9,26 @@ const productModel = require('../model/product')
 
 // product 불러오는 API
 router.get("/1111", (req, res) => {
-    res.json({
-        message : "ㅇㅏㅁㅜㄱㅓㄴㅏ"
-    })
+
+    productModel
+        .find()
+        .then(docs => {
+            res.json({
+                msg: "product total get",
+                count: docs.length,
+                products: docs
+            })
+        })
+        .catch(err => {
+            res.json({
+                msg: err.message
+            })
+        })
+
+
+    // res.json({
+    //     message : "ㅇㅏㅁㅜㄱㅓㄴㅏ"
+    // })
 })
 
 
