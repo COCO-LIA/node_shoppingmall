@@ -3,6 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const userModel = require('../model/user')
 
@@ -81,7 +82,7 @@ router.post("/register", (req, res) => {
 // 로그인 API
 router.post("/login", (req, res) => {
 
-    // 이메일 유무체크 -> 패스워드 매칭-> 접속유저정보 뿌려주기 
+    // 이메일 유무체크 -> 패스워드 매칭-> 접속유저정보 뿌려주기(jwt 생성 )
     userModel
         .findOne({email: req.body.em})
         .then(user => {
@@ -97,7 +98,18 @@ router.post("/login", (req, res) => {
                            msg: "Auth failed(password incorrected)"
                        })
                    } else {
-                       res.json(user)
+                       // res.json(user)
+
+                       // jwt 생성
+                       const token = jwt.sign(
+                           {id: user._id, email: user.email},
+                           "imim",
+                           {expiresIn: "1h"} //1d. 1M
+                       )
+                       res.json({
+                           msg: "Auth successful",
+                           tokenInfo: token
+                       })
                    }
                })
 
