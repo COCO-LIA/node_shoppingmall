@@ -2,122 +2,29 @@
 const express = require("express")
 const router = express.Router()
 
-const orderModel = require('../model/odrer')
 const checkAuth = require('../middleware/check-auth')
 
+const {
+    orders_get_all,
+    orders_get_order,
+    orders_post_order,
+    orders_patch_order,
+    orders_delete_all
+} = require('../controller/order')
+
 // order 불러오는 API
-router.get("/",checkAuth, (req, res) => {
-    // res.json( {
-    //     message : "order get"
-    // })
-
-    orderModel
-        .find()
-        .populate("product", ["name", "price"])
-        .then(docs => {
-            res.json({
-                msg: "order total get",
-                count: docs.length,
-                orders: docs.map(doc => {
-                    return{
-                        id: doc._id,
-                        product:doc.product,
-                        quantity:doc.quantity,
-                        request: {
-                            type: 'GET',
-                            url: "http://localhost:5000/order/" + doc._id
-                        }
-                    }
-                })
-            })
-        })
-
-
-})
+router.get("/",checkAuth, orders_get_all)
 
 //상세 불러오기 API
-router.get("/:orderId", checkAuth, (req, res) => {
-
-    orderModel
-        .findById(req.params.orderId)
-        .populate("product", ["name", "price"])
-        .then(item => {
-            res.json({
-                msg: "order data" + item._id,
-                orderInfo: {
-                    id: item._id,
-                    product: item.product,
-                    quantity: item.quantity,
-                    reqest:{
-                        type: 'GET',
-                        url: "http://localhost:5000/order/"
-                    }
-                }
-            })
-        })
-})
-
+router.get("/:orderId", checkAuth, orders_get_order)
 
 // order 등록해주는 API
-router.post("/",checkAuth, (req, res) => {
-    // res.json({
-    //     msg: "order등록해주는 API"
-    // })
-
-    const orderInfo = new orderModel({
-        product: req.body.productId,
-        quantity: req.body.qty
-    })
-
-    orderInfo
-        .save()
-        .then(item =>{
-            res.json({
-                msg: "장바구니담기 ",
-                orderInfo: item
-            })
-        })
-        .catch(err => {
-            res.json({
-                msg: err.message
-            })
-        })
-
-
-
-
-})
+router.post("/",checkAuth, orders_post_order)
 
 // order 수정하는 API
-router.patch("/", checkAuth, (req, res) => {
-    res.json({
-        msg:"order수정하는 API"
-    })
-})
-
+router.patch("/", checkAuth, orders_patch_order)
 
 // order 삭제하는 API
-router.delete("/", checkAuth, (req, res) =>{
-    // res.json({
-    //     msg:"order 삭제하는 api"
-    // })
-    orderModel
-        .deleteMany()
-        .then(() => {
-            res.json({
-                msg: "delete ordered",
-                request: {
-                    type: 'GET',
-                    url: "http://localhost:5000/order/"
-                }
-            })
-
-        })
-        .catch(err => {
-            res.json({
-                msg: err.message
-            })
-        })
-})
+router.delete("/", checkAuth, orders_delete_all)
 
 module.exports = router

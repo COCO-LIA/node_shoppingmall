@@ -15,7 +15,12 @@ const app = express()
 // DB 커넥트
 const dbAddress = "mongodb+srv://admin:qwer@cluster0.huxry.mongodb.net/shoppingmall?retryWrites=true&w=majority"
 
-const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+const dbOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+}
 
 
 mongoose
