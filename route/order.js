@@ -3,9 +3,10 @@ const express = require("express")
 const router = express.Router()
 
 const orderModel = require('../model/odrer')
+const checkAuth = require('../middleware/check-auth')
 
 // order 불러오는 API
-router.get("/", (req, res) => {
+router.get("/",checkAuth, (req, res) => {
     // res.json( {
     //     message : "order get"
     // })
@@ -35,7 +36,7 @@ router.get("/", (req, res) => {
 })
 
 //상세 불러오기 API
-router.get("/:orderId", (req, res) => {
+router.get("/:orderId", checkAuth, (req, res) => {
 
     orderModel
         .findById(req.params.orderId)
@@ -58,7 +59,7 @@ router.get("/:orderId", (req, res) => {
 
 
 // order 등록해주는 API
-router.post("/",(req, res) => {
+router.post("/",checkAuth, (req, res) => {
     // res.json({
     //     msg: "order등록해주는 API"
     // })
@@ -88,7 +89,7 @@ router.post("/",(req, res) => {
 })
 
 // order 수정하는 API
-router.patch("/", (req, res) => {
+router.patch("/", checkAuth, (req, res) => {
     res.json({
         msg:"order수정하는 API"
     })
@@ -96,7 +97,7 @@ router.patch("/", (req, res) => {
 
 
 // order 삭제하는 API
-router.delete("/", (req, res) =>{
+router.delete("/", checkAuth, (req, res) =>{
     // res.json({
     //     msg:"order 삭제하는 api"
     // })

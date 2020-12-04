@@ -4,6 +4,8 @@ const router = express.Router()
 
 
 const productModel = require('../model/product')
+const checkAuth = require('../middleware/check-auth')
+
 
 // 3
 
@@ -45,7 +47,7 @@ router.get("/1111", (req, res) => {
 
 
 // 상세 product 불러오는 API
-router.get("/:productId",(req, res) => {
+router.get("/:productId", checkAuth, (req, res) => {
 
     productModel
         .findById(req.params.productId)
@@ -75,7 +77,7 @@ router.get("/:productId",(req, res) => {
 
 
 // product 등록해주는 API
-router.post("/",(req, res) => {
+router.post("/", checkAuth, (req, res) => {
 
     // 사용자입력값설정
     //
@@ -128,7 +130,7 @@ router.post("/",(req, res) => {
 
 
 // product 수정하는 API
-router.patch("/:productId", (req, res) => {
+router.patch("/:productId",checkAuth, (req, res) => {
     // res.json( {
     //     msg:"product 수정주는 API"
     // })
@@ -166,7 +168,7 @@ router.patch("/:productId", (req, res) => {
 
 
 // 전체 product 삭제하는 API
-router.delete("/", (req, res) => {
+router.delete("/", checkAuth, (req, res) => {
     productModel
         .deleteMany()
         .then(() => {
@@ -192,7 +194,7 @@ router.delete("/", (req, res) => {
 })
 
 // 특정 product를 삭제하는 API
-router.delete("/:productId", (req, res) => {
+router.delete("/:productId", checkAuth, (req, res) => {
     productModel
         .findByIdAndDelete(req.params.productId)
         .then(() => {
