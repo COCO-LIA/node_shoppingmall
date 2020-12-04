@@ -82,7 +82,7 @@ exports.user_login = (req, res) => {
                         // jwt 생성
                         const token = jwt.sign(
                             {id: user._id, email: user.email},
-                            "imim",
+                            process.env.SECRET_KEY,
                             {expiresIn: "1h"} //1d. 1M
                         )
                         res.json({
