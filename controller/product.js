@@ -71,24 +71,10 @@ exports.products_get_product = (req, res) => {
 // product 등록하는 코드
 exports.products_post_product = (req, res) => {
 
-    // 사용자입력값설정
-    //
-    // const productInfo = {
-    //     name: req.body.productname,
-    //     price: req.body.productprice,
-    //     category: req.body.category
-    // }
-    //
-    //
-    // res.json({
-    //     msg: "product 등록해주는 API",
-    //     product: productInfo
-    // })
+    const { name, price, category } = req.body;
 
     const productInfo = new productModel({
-        name: req.body.productname,
-        price: req.body.productprice,
-        category: req.body.category
+        name, price, category
     })
 
     productInfo
